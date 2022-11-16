@@ -1,16 +1,23 @@
-import {Board} from "./board.js";
+import {TicTacToeCell} from "./tictactoecell.js";
 
-const tictactoeArray = [];
-tictactoeArray.length = 9;
-
+const tictactoeArray = [
+    [new TicTacToeCell,new TicTacToeCell,new TicTacToeCell],
+    [new TicTacToeCell,new TicTacToeCell,new TicTacToeCell],
+    [new TicTacToeCell,new TicTacToeCell,new TicTacToeCell]
+];
+const lastCap = -1;
 function initialize()
 {
 
 }
 
-function captureTile(num)
-{
-    
+function captureTile(row, col, tileIn)
+{   
+    if ((lastCap != -1 && (row*3) + col != lastCap) && 
+    tictactoeArray[row][col].capture(tileIn))
+    {
+        lastCap = (row*3)+col;
+    }
 }
 
 
