@@ -1,0 +1,28 @@
+.container
+{
+
+}
+
+
+.tile
+{
+    height: 100px;
+    width: 100px;
+    background-color: #94a2b0;
+}
+
+.tile:hover
+{
+    background-color: #67717a;
+}
+
+.btn:active
+{
+    transform: scale(0.95);
+}
+
+
+.board
+{
+    margin: 0 auto;
+}
