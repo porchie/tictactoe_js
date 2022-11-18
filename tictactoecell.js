@@ -23,6 +23,11 @@ export class TicTacToeCell
         return this.capturedNum;
     }
 
+    isLocked()
+    {
+        return this.capturedNum >= 2;
+    }
+
     getCellVal()
     {
         return this.cellVal;
