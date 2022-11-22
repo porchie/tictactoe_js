@@ -10,7 +10,6 @@ export class TicTacToeCell
     {
         if(this.capturedNum < 2)
         {
-            console.log("yes");
             this.cellVal = tictacInput;
             this.capturedNum++;   
             return true;
@@ -26,6 +25,11 @@ export class TicTacToeCell
     isLocked()
     {
         return this.capturedNum >= 2;
+    }
+
+    cappedOnce()
+    {
+        return this.capturedNum === 1;
     }
 
     getCellVal()
