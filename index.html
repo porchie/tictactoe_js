@@ -10,29 +10,32 @@
 <body>
     <div class = "container">
         <div id = "option" class = "option">
-            <span>CHOOSE X OR O</span>
+            <span style = "font-size: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">CHOOSE X OR O</span>
+            <hr/>
             <button id = "btn-o" class = "btn option-btn">O</button>
             <button id = "btn-x" class = "btn option-btn">X</button>
         </div>
-        <table id = "tictactoe-board" class = "board">
-            <tr>
-                <td><button class = "tile btn" id = "btn-0"></button></td>
-                <td><button class = "tile btn" id = "btn-1"></sbutton></td>
-                <td><button class = "tile btn" id = "btn-2"></button></td>
-            </tr>
-            <tr>
-                <td><button class = "tile btn" id = "btn-3"></button></td>
-                <td><button class = "tile btn" id = "btn-4"></button></td>
-                <td><button class = "tile btn" id = "btn-5"></button></td>
-            </tr>
-            <tr>
-                <td><button class = "tile btn" id = "btn-6"></button></td>
-                <td><button class = "tile btn" id = "btn-7"></button></td>
-                <td><button class = "tile btn" id = "btn-8"></button></td>
-            </tr>
-        </table>
-        <button class = "btn btn-rst" id = "btn-reset">RESET</button>
-        <button class
+        <div class = "playfield" id = "playfield">
+            <table id = "tictactoe-board" class = "board">
+                <tr>
+                    <td><button class = "tile btn" id = "btn-0"></button></td>
+                    <td><button class = "tile btn" id = "btn-1"></sbutton></td>
+                    <td><button class = "tile btn" id = "btn-2"></button></td>
+                </tr>
+                <tr>
+                    <td><button class = "tile btn" id = "btn-3"></button></td>
+                    <td><button class = "tile btn" id = "btn-4"></button></td>
+                    <td><button class = "tile btn" id = "btn-5"></button></td>
+                </tr>
+                <tr>
+                    <td><button class = "tile btn" id = "btn-6"></button></td>
+                    <td><button class = "tile btn" id = "btn-7"></button></td>
+                    <td><button class = "tile btn" id = "btn-8"></button></td>
+                </tr>
+            </table>
+            <button class = "btn btn-rst" id = "btn-reset">RESET</button>
+            <button class = "btn btn-ch" id = "btn-choice">Choose x or o</button>
+        </div>
     </div>
     <script type="module" src="./tictactoecell.js"></script>
     <script type="module" src="./tictactoe.js"></script>

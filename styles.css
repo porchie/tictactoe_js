@@ -8,7 +8,12 @@
 {
     height: 100px;
     width: 100px;
+    border-width: 4px;
     background-color: #94a2b0;
+    border-left-color:#a4b2c0;
+    border-top-color: #a4b2c0;;
+    border-bottom-color: gray;
+    border-right-color: gray;
     font-size: 50px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: white
@@ -17,6 +22,48 @@
 .tile:hover
 {
     filter: brightness(75%);
+}
+
+.tile:disabled
+{
+    transition-duration: 400ms;
+    filter: brightness(45%);
+}
+
+.btn-rst
+{
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color:#94a2b0 ;
+    border-color: #94a2b0;
+    border-radius: 5px;
+    border-width: 3px;
+}
+
+.btn-ch
+{
+    height: 50px;
+    width: 150px;
+    font-size: 20px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color:#94a2b0 ;
+    border-color: #94a2b0;
+    border-radius: 5px;
+    border-width: 3px;
+}
+
+.option-btn
+{
+    height: 40px;
+    width: 40px;
+    font-size: 25px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color:lightblue;
+    border-color: lightblue;
+    border-radius: 5px;
+    border-width: 3px;
 }
 
 .btn:active
@@ -36,19 +83,29 @@
 {
     background-color: #00a1ff;
     border-width: 4px;
-    border-color: blue;
+    border-left-color:#22b1ff;
+    border-top-color: #22b1ff;;
+    border-bottom-color: blue;
+    border-right-color: blue;
 }
 
 .cap-2
 {
     background-color: #ff21bf;
     border-width: 4px;
-    border-color: magenta;
+    border-left-color:#ff41df;
+    border-top-color: #ff41df;;
+    border-bottom-color: magenta;
+    border-right-color: magenta;
+
 }
 
 .cap-last
 {
     background-color: #ff002f;
     border-width: 4px;
-    border-color: red;
+    border-left-color:#ff5555;
+    border-top-color: #ff5555;
+    border-bottom-color: red;
+    border-right-color: red;
 }
