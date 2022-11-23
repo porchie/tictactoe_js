@@ -5,6 +5,7 @@ const tictactoeArray = [
     new TicTacToeCell,new TicTacToeCell,new TicTacToeCell,
     new TicTacToeCell,new TicTacToeCell,new TicTacToeCell
 ];
+
 const btnArr = [];
 let lastCap = -1;
 let playerStr = "";
@@ -12,10 +13,11 @@ let cpuStr = "";
 let isEnded = false;
 function initialize()
 {
-    document.getElementById("tictactoe-board").style.display = "none";
+    document.getElementById("playfield").style.display = "none";
     document.getElementById("btn-o").addEventListener("click",() => pickOption("O"));
     document.getElementById("btn-x").addEventListener("click",() => pickOption("X"));
     document.getElementById("btn-reset").addEventListener("click",() => reset());
+    document.getElementById("btn-choice").addEventListener("click",() => returnToOption())
     for(let i = 0;i<9;i++)
     {
         let b = document.getElementById("btn-"+i);
@@ -26,10 +28,12 @@ function initialize()
 
 function reset()
 {
+    
     isEnded = false;
     tictactoeArray.forEach(e => e.reset());
     btnArr[lastCap].classList.remove("cap-last");
     btnArr.forEach((e) => {
+        e.disabled = false;
         if(e.classList.contains("cap-1")) e.classList.remove("cap-1");
         if(e.classList.contains("cap-2")) e.classList.remove("cap-2");
     });
@@ -72,11 +76,20 @@ function renderBoard()
     }
 }
 
+function returnToOption()
+{
+    reset();
+    playerStr = "";
+    cpuStr = "";
+    document.getElementById("playfield").style.display = "none";
+    document.getElementById("option").style.display = "";
+}
+
 function pickOption(knotOrCross)
 {
     playerStr = knotOrCross;   
     document.getElementById("option").style.display = "none";
-    document.getElementById("tictactoe-board").style.display = "";
+    document.getElementById("playfield").style.display = "";
     
     cpuStr = (playerStr === 'X') ? 'O' : 'X';
     renderBoard();
@@ -96,7 +109,7 @@ function checkWin()
     //diagonal
     isSameVal(tictactoeArray[0],tictactoeArray[4],tictactoeArray[8],playerStr) ||
     isSameVal(tictactoeArray[2],tictactoeArray[4],tictactoeArray[6],playerStr);
-    if(!playerWin) //check for cpuWin
+    if(!playerWin) //player didnt win
     {
         let cpuWin = //horizontal
         isSameVal(tictactoeArray[0],tictactoeArray[1],tictactoeArray[2],cpuStr) ||
@@ -114,6 +127,7 @@ function checkWin()
             isEnded = true;
             //game ends
             console.log("u lost gg ez");
+            btnArr.forEach(e => e.disabled = true);
             //cpuwin
         }
     }
@@ -121,9 +135,11 @@ function checkWin()
     {
         isEnded = true;
         console.log("nice win bro");
+
+        btnArr.forEach(e => e.disabled = true);
+
         //game ends
         //players win
-
     }
 }
 
@@ -134,6 +150,10 @@ function isSameVal(cell1,cell2,cell3,str)
 
 function cpuAi()
 {
+    let normalizedArr = normalizeTwoLayer(tictactoeArray);
+
+
+    //random here
     let listOfPossibleMoves = [];
     for(let i = 0; i<tictactoeArray.length;i++)
     {
@@ -141,9 +161,24 @@ function cpuAi()
         if(tictactoeArray[i].isLocked()) continue;
         listOfPossibleMoves.push(i);
     }
-
     let rand = pickRandomFromArray(listOfPossibleMoves);
+
+
     captureTile(rand, cpuStr);
+}
+
+function normalizeTwoLayer(twoLayerArr)
+{
+    let arr = [];
+    for(let i = 0;i<twoLayerArr.length;i++)
+    {
+        let cellVal = twoLayerArr[i].getCellVal();
+        if(twoLayerArr[i].isLocked() || i === lastCap) //LOCKED OR LAST CAP, SO CANT OVERRIDE 
+            arr.push(cellVal);
+        else
+            arr.push(' '); // space is empty square
+    }
+    return arr; //normalized array of O and X
 }
 
 function pickRandomFromArray(arr)
