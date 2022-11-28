@@ -187,33 +187,33 @@ function cpuAi()
 function possibleWin(tile, arr)
 {
     //0
-    if(!tictactoeArray[0].isLocked() && 
+    if(lastCap !== 0 && !tictactoeArray[0].isLocked() && 
     ((arr[1] === tile && arr[2] === tile) || 
     (arr[3] === tile && arr[6] === tile)    ||
     (arr[4] === tile && arr[8] === tile)))
     return 0;
 
     //1
-    if(!tictactoeArray[1].isLocked() && 
+    if(lastCap !== 1 && !tictactoeArray[1].isLocked() && 
     ((arr[0] === tile && arr[2] === tile) || 
     (arr[4] === tile && arr[7] === tile)))
     return 1;
 
     //2
-    if(!tictactoeArray[2].isLocked() && 
+    if(lastCap !== 2 && !tictactoeArray[2].isLocked() && 
     ((arr[0] === tile && arr[1] === tile) || 
     (arr[5] === tile && arr[8] === tile)    ||
     (arr[4] === tile && arr[6] === tile)))
     return 2;
 
     //3
-    if(!tictactoeArray[3].isLocked() && 
+    if(lastCap !== 3 && !tictactoeArray[3].isLocked() && 
     ((arr[0] === tile && arr[6] === tile) || 
     (arr[4] === tile && arr[5] === tile)))
     return 3;
 
     //4
-    if(!tictactoeArray[4].isLocked() && 
+    if(lastCap !== 4 && !tictactoeArray[4].isLocked() && 
     ((arr[0] === tile && arr[8] === tile) || 
     (arr[5] === tile && arr[3] === tile)    ||
     (arr[2] === tile && arr[6] === tile)    ||
@@ -221,27 +221,27 @@ function possibleWin(tile, arr)
     return 4;
 
     //5
-    if(!tictactoeArray[5].isLocked() && 
+    if(lastCap !== 5 && !tictactoeArray[5].isLocked() && 
     ((arr[8] === tile && arr[2] === tile) || 
     (arr[4] === tile && arr[3] === tile)))
     return 5;
 
     //6
-    if(!tictactoeArray[6].isLocked() && 
+    if(lastCap !== 6 && !tictactoeArray[6].isLocked() && 
     ((arr[7] === tile && arr[8] === tile) || 
     (arr[3] === tile && arr[0] === tile)    ||
     (arr[4] === tile && arr[2] === tile)))
     return 6;
 
     //7
-    if(!tictactoeArray[7].isLocked() && 
+    if(lastCap !== 7 && !tictactoeArray[7].isLocked() && 
     ((arr[6] === tile && arr[8] === tile) || 
     (arr[4] === tile && arr[1] === tile)))
 
     return 7;
 
     //8
-    if(!tictactoeArray[8].isLocked() && 
+    if(lastCap !== 8 && !tictactoeArray[8].isLocked() && 
     ((arr[6] === tile && arr[7] === tile) || 
     (arr[4] === tile && arr[0] === tile)    ||
     (arr[5] === tile && arr[2] === tile)))
