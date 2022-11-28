@@ -32,6 +32,7 @@ function reset()
     isEnded = false;
     if(board.classList.contains('win')) board.classList.remove('win');
     if(board.classList.contains('lose'))board.classList.remove('lose');
+    if(board.classList.contains('tie'))board.classList.remove('tie');
 
     tictactoeArray.forEach(e => e.reset());
     if(lastCap >= 0)btnArr[lastCap].classList.remove("cap-last");
@@ -119,7 +120,7 @@ function checkWin()
 
         //game ends
         board.classList.add("win");
-        //players win
+       //players win
     }
     else
     {
@@ -136,12 +137,26 @@ function checkWin()
         isSameVal(tictactoeArray[2],tictactoeArray[4],tictactoeArray[6],cpuStr);
         if(cpuWin)
         {
+            
             isEnded = true;
             btnArr.forEach(e => e.disabled = true);
             //game ends
             board.classList.add("lose");
                         //cpuwin
         }
+    }
+    //tie
+    let tie = true;
+    for(let i = 0;i<8;i++)
+    {
+        if(!tictactoeArray[i].isLocked()) tie = false;
+    }
+    if(tie)
+    {
+        isEnded = true;
+        btnArr.forEach(e => e.disabled = true);
+        //game ends
+        board.classList.add("tie");
     }
 }
 
@@ -186,6 +201,95 @@ function cpuAi()
 
 function possibleWin(tile, arr)
 {
+    if(tile === playerStr) //try and block by capturing the player's tile
+    {
+        //0
+        if(lastCap !== 0 && 
+        !tictactoeArray[0].isLocked() && 
+        arr[0] === tile &&
+        (arr[1] === tile || 
+         arr[3] === tile ||
+         arr[4] === tile))
+        return 0;
+
+        //1
+        if(lastCap !== 1 && 
+        !tictactoeArray[1].isLocked() && 
+        arr[1] === tile &&
+        (arr[0] === tile || 
+         arr[2] === tile ||
+         arr[4] === tile))
+        return 1;
+
+        //2
+        if(lastCap !== 2 && 
+        !tictactoeArray[2].isLocked() && 
+        arr[2] === tile &&
+        (arr[1] === tile || 
+         arr[5] === tile ||
+         arr[4] === tile))
+        return 2;
+
+        //3
+        if(lastCap !== 3 && 
+        !tictactoeArray[3].isLocked() && 
+        arr[3] === tile &&
+        (arr[0] === tile || 
+         arr[6] === tile ||
+         arr[4] === tile))
+        return 3;
+
+        //4
+        if(lastCap !== 4 && 
+        !tictactoeArray[4].isLocked() && 
+        arr[4] === tile &&
+        (arr[0] === tile || 
+         arr[1] === tile || 
+         arr[2] === tile ||
+         arr[3] === tile || 
+         arr[5] === tile ||
+         arr[6] === tile ||
+         arr[7] === tile || 
+         arr[8] === tile))
+        return 4;
+        
+        //5
+        if(lastCap !== 5 && 
+        !tictactoeArray[5].isLocked() && 
+        arr[5] === tile &&
+        (arr[2] === tile || 
+         arr[8] === tile ||
+         arr[4] === tile))
+        return 5;
+        
+        //6
+        if(lastCap !== 6 && 
+        !tictactoeArray[6].isLocked() && 
+        arr[6] === tile &&
+        (arr[3] === tile || 
+         arr[7] === tile ||
+         arr[4] === tile))
+        return 6;
+        
+        //7
+        if(lastCap !== 7 && 
+        !tictactoeArray[7].isLocked() && 
+        arr[7] === tile &&
+        (arr[6] === tile || 
+         arr[8] === tile ||
+         arr[4] === tile))
+        return 7;
+        
+        //8
+        if(lastCap !== 8 && 
+        !tictactoeArray[8].isLocked() && 
+        arr[8] === tile &&
+        (arr[5] === tile || 
+         arr[7] === tile ||
+         arr[4] === tile))
+        return 8;
+    }
+
     //0
     if(lastCap !== 0 && !tictactoeArray[0].isLocked() && 
     ((arr[1] === tile && arr[2] === tile) || 
