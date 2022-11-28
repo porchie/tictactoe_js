@@ -5,7 +5,7 @@ const tictactoeArray = [
     new TicTacToeCell,new TicTacToeCell,new TicTacToeCell,
     new TicTacToeCell,new TicTacToeCell,new TicTacToeCell
 ];
-
+const board = document.getElementById("tictactoe-board");
 const btnArr = [];
 let lastCap = -1;
 let playerStr = "";
@@ -30,8 +30,11 @@ function reset()
 {
     
     isEnded = false;
+    if(board.classList.contains('win')) board.classList.remove('win');
+    if(board.classList.contains('lose'))board.classList.remove('lose');
+
     tictactoeArray.forEach(e => e.reset());
-    btnArr[lastCap].classList.remove("cap-last");
+    if(lastCap >= 0)btnArr[lastCap].classList.remove("cap-last");
     btnArr.forEach((e) => {
         e.disabled = false;
         if(e.classList.contains("cap-1")) e.classList.remove("cap-1");
@@ -109,7 +112,16 @@ function checkWin()
     //diagonal
     isSameVal(tictactoeArray[0],tictactoeArray[4],tictactoeArray[8],playerStr) ||
     isSameVal(tictactoeArray[2],tictactoeArray[4],tictactoeArray[6],playerStr);
-    if(!playerWin) //player didnt win
+    if(playerWin) //player win
+    {
+        isEnded = true;
+        btnArr.forEach(e => e.disabled = true);
+
+        //game ends
+        board.classList.add("win");
+        //players win
+    }
+    else
     {
         let cpuWin = //horizontal
         isSameVal(tictactoeArray[0],tictactoeArray[1],tictactoeArray[2],cpuStr) ||
@@ -125,21 +137,11 @@ function checkWin()
         if(cpuWin)
         {
             isEnded = true;
-            //game ends
-            console.log("u lost gg ez");
             btnArr.forEach(e => e.disabled = true);
-            //cpuwin
+            //game ends
+            board.classList.add("lose");
+                        //cpuwin
         }
-    }
-    else
-    {
-        isEnded = true;
-        console.log("nice win bro");
-
-        btnArr.forEach(e => e.disabled = true);
-
-        //game ends
-        //players win
     }
 }
 
@@ -152,7 +154,23 @@ function cpuAi()
 {
     let normalizedArr = normalizeTwoLayer(tictactoeArray);
 
+    ///win algo///
+    //check if cpu can win, check this first since it can end game
+    let cpuWin = possibleWin(cpuStr, normalizedArr);
 
+    if(cpuWin != -1)
+    {
+        captureTile(cpuWin,cpuStr);
+        return;
+    }
+    
+    //check if player can win then block
+    let plyWin = possibleWin(playerStr, normalizedArr);
+    if(plyWin != -1)
+    {
+        captureTile(plyWin,cpuStr);
+        return;
+    }
     //random here
     let listOfPossibleMoves = [];
     for(let i = 0; i<tictactoeArray.length;i++)
@@ -162,10 +180,80 @@ function cpuAi()
         listOfPossibleMoves.push(i);
     }
     let rand = pickRandomFromArray(listOfPossibleMoves);
-
-
     captureTile(rand, cpuStr);
+    return;
 }
+
+function possibleWin(tile, arr)
+{
+    //0
+    if(!tictactoeArray[0].isLocked() && 
+    ((arr[1] === tile && arr[2] === tile) || 
+    (arr[3] === tile && arr[6] === tile)    ||
+    (arr[4] === tile && arr[8] === tile)))
+    return 0;
+
+    //1
+    if(!tictactoeArray[1].isLocked() && 
+    ((arr[0] === tile && arr[2] === tile) || 
+    (arr[4] === tile && arr[7] === tile)))
+    return 1;
+
+    //2
+    if(!tictactoeArray[2].isLocked() && 
+    ((arr[0] === tile && arr[1] === tile) || 
+    (arr[5] === tile && arr[8] === tile)    ||
+    (arr[4] === tile && arr[6] === tile)))
+    return 2;
+
+    //3
+    if(!tictactoeArray[3].isLocked() && 
+    ((arr[0] === tile && arr[6] === tile) || 
+    (arr[4] === tile && arr[5] === tile)))
+    return 3;
+
+    //4
+    if(!tictactoeArray[4].isLocked() && 
+    ((arr[0] === tile && arr[8] === tile) || 
+    (arr[5] === tile && arr[3] === tile)    ||
+    (arr[2] === tile && arr[6] === tile)    ||
+    (arr[1] === tile && arr[7] === tile)))
+    return 4;
+
+    //5
+    if(!tictactoeArray[5].isLocked() && 
+    ((arr[8] === tile && arr[2] === tile) || 
+    (arr[4] === tile && arr[3] === tile)))
+    return 5;
+
+    //6
+    if(!tictactoeArray[6].isLocked() && 
+    ((arr[7] === tile && arr[8] === tile) || 
+    (arr[3] === tile && arr[0] === tile)    ||
+    (arr[4] === tile && arr[2] === tile)))
+    return 6;
+
+    //7
+    if(!tictactoeArray[7].isLocked() && 
+    ((arr[6] === tile && arr[8] === tile) || 
+    (arr[4] === tile && arr[1] === tile)))
+
+    return 7;
+
+    //8
+    if(!tictactoeArray[8].isLocked() && 
+    ((arr[6] === tile && arr[7] === tile) || 
+    (arr[4] === tile && arr[0] === tile)    ||
+    (arr[5] === tile && arr[2] === tile)))
+    return 8;
+
+    //nowin
+    return -1;
+}
+
+
+
+
 
 function normalizeTwoLayer(twoLayerArr)
 {
@@ -173,10 +261,7 @@ function normalizeTwoLayer(twoLayerArr)
     for(let i = 0;i<twoLayerArr.length;i++)
     {
         let cellVal = twoLayerArr[i].getCellVal();
-        if(twoLayerArr[i].isLocked() || i === lastCap) //LOCKED OR LAST CAP, SO CANT OVERRIDE 
-            arr.push(cellVal);
-        else
-            arr.push(' '); // space is empty square
+        arr.push(cellVal);
     }
     return arr; //normalized array of O and X
 }

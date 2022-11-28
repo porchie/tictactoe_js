@@ -77,6 +77,45 @@
     margin: 0 auto;
 }
 
+.win::before
+{
+    font-size: 60px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: blue;
+    left:612px;
+    text-align: center;
+    position: absolute;
+    box-sizing: border-box;
+    content: 'WIN';
+    background: rgba(0, 0, 0, 0.5);
+    width: 310px;
+    height: 310px;
+    pointer-events: none;
+}
+
+.lose::before
+{
+    font-size: 60px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    left:612px;
+    text-align: center;
+    position: absolute;
+    box-sizing: border-box;
+    content: 'LOSE';
+    background: rgba(0, 0, 0, 0.5);
+    width: 310px;
+    height: 310px;
+    pointer-events: none;
+}
+
+
 
 
 .cap-1
