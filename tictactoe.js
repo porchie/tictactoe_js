@@ -5,7 +5,7 @@ const tictactoeArray = [
     new TicTacToeCell,new TicTacToeCell,new TicTacToeCell,
     new TicTacToeCell,new TicTacToeCell,new TicTacToeCell
 ];
-const board = document.getElementById("tictactoe-board");
+const board = document.querySelector("#tictactoe-board");
 const btnArr = [];
 let lastCap = -1;
 let playerStr = "";
@@ -13,19 +13,30 @@ let cpuStr = "";
 let isEnded = false;
 function initialize()
 {
-    document.getElementById("playfield").style.display = "none";
-    document.getElementById("btn-o").addEventListener("click",() => pickOption("O"));
-    document.getElementById("btn-x").addEventListener("click",() => pickOption("X"));
-    document.getElementById("btn-reset").addEventListener("click",() => reset());
-    document.getElementById("btn-choice").addEventListener("click",() => returnToOption())
+    document.querySelector("#playfield").style.display = "none";
+    document.querySelector("#btn-o").addEventListener("click",() => pickOption("O"));
+    document.querySelector("#btn-x").addEventListener("click",() => pickOption("X"));
+    document.querySelector("#btn-reset").addEventListener("click",() => reset());
+    document.querySelector("#btn-choice").addEventListener("click",() => returnToOption())
     for(let i = 0;i<9;i++)
     {
-        let b = document.getElementById(`btn-${i}`);
+        let b = document.querySelector(`#btn-${i}`);
         btnArr.push(b);
         b.addEventListener("click", () => captureTile(i,playerStr));
     }
+
+    let allBtn = document.querySelectorAll(".btn");
+    allBtn.forEach((btn) =>{
+        btn.addEventListener("click", () => playAudio())
+    });
+
 }
 
+function playAudio()
+{
+    let audio = document.querySelector("#audio");
+    audio.play();
+}
 function reset()
 {
     
@@ -85,15 +96,15 @@ function returnToOption()
     reset();
     playerStr = "";
     cpuStr = "";
-    document.getElementById("playfield").style.display = "none";
-    document.getElementById("option").style.display = "";
+    document.querySelector("#playfield").style.display = "none";
+    document.querySelector("#option").style.display = "";
 }
 
 function pickOption(knotOrCross)
 {
     playerStr = knotOrCross;   
-    document.getElementById("option").style.display = "none";
-    document.getElementById("playfield").style.display = "";
+    document.querySelector("#option").style.display = "none";
+    document.querySelector("#playfield").style.display = "";
     
     cpuStr = (playerStr === 'X') ? 'O' : 'X';
     renderBoard();
