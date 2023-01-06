@@ -1,10 +1,12 @@
 .container
 {
     text-align: center;
+    display: flex;
 }
 
 .playfield
 {
+    justify-self: center;
     background-color: white;
     margin: auto;
     width: 380px;
@@ -37,6 +39,13 @@
 {
     transition-duration: 400ms;
     filter: brightness(45%);
+}
+
+.btn-ui
+{
+    justify-self: center;
+    display: flex;
+    justify-content: space-around;
 }
 
 .btn-rst
