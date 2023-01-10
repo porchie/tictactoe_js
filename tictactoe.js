@@ -18,6 +18,12 @@ function initialize()
     document.querySelector("#btn-x").addEventListener("click",() => pickOption("X"));
     document.querySelector("#btn-reset").addEventListener("click",() => reset());
     document.querySelector("#btn-choice").addEventListener("click",() => returnToOption())
+    document.querySelector("#btn-reset").addEventListener("click", () => {
+        document.querySelectorAll('audio').forEach(a => {a.pause();a.currentTime=0})
+    });
+    document.querySelector("#btn-choice").addEventListener("click", () => {
+        document.querySelectorAll('audio').forEach(a => {a.pause();a.currentTime=0})
+    });
     for(let i = 0;i<9;i++)
     {
         let b = document.querySelector(`#btn-${i}`);
@@ -27,14 +33,14 @@ function initialize()
 
     let allBtn = document.querySelectorAll(".btn");
     allBtn.forEach((btn) =>{
-        btn.addEventListener("click", () => playAudio())
+        btn.addEventListener("click", () => playAudio("click-sound"))
     });
 
 }
 
-function playAudio()
+function playAudio(audioid)
 {
-    let audio = document.querySelector("#audio");
+    let audio = document.querySelector(`#${audioid}`);
     audio.play();
 }
 function reset()
@@ -130,6 +136,7 @@ function checkWin()
         btnArr.forEach(e => e.disabled = true);
 
         //game ends
+        playAudio("win-sound");
         board.classList.add("win");
        //players win
     }
@@ -152,6 +159,7 @@ function checkWin()
             isEnded = true;
             btnArr.forEach(e => e.disabled = true);
             //game ends
+            playAudio("lose-sound");
             board.classList.add("lose");
                         //cpuwin
         }
