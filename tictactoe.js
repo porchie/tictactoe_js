@@ -47,6 +47,8 @@ function reset()
 {
     
     isEnded = false;
+    let confetti = document.querySelector("#confetti");
+    if(confetti)confetti.remove();
     if(board.classList.contains('win')) board.classList.remove('win');
     if(board.classList.contains('lose'))board.classList.remove('lose');
     if(board.classList.contains('tie'))board.classList.remove('tie');
@@ -138,6 +140,8 @@ function checkWin()
         //game ends
         playAudio("win-sound");
         board.classList.add("win");
+        document.querySelector("#playfield").insertAdjacentHTML("beforebegin",
+        "<video loop muted autoplay src='assets/confetti.mov' id='confetti' style='position:absolute; z-index: -999; '></video>");
        //players win
     }
     else
