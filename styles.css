@@ -3,18 +3,19 @@
     text-align: center;
     display: flex;
     justify-content: center;
+    background-color: transparent;
 }
 
 .playfield
 {
+
     justify-self: center;
-    background-color: white;
+    background-color:transparent;
     margin: auto;
     position: absolute;
     z-index: 999;
     width: 380px;
     height: 400px;
-    border:white solid 20px;
     padding-top: 20px;
 }
 
